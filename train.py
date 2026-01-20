@@ -9,7 +9,7 @@ from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
 from sklearn.metrics import classification_report, roc_auc_score
 
 # 1. Load dataset
-df = pd.read_csv("data/churn.csv")
+df = pd.read_csv("data/Telco-Customer-Churn.csv")
 
 # Convert TotalCharges to numeric (if not done already)
 df["TotalCharges"] = pd.to_numeric(df["TotalCharges"], errors="coerce")
@@ -50,8 +50,9 @@ models = {
     "random_forest": {
         "model": RandomForestClassifier(random_state=42),
         "params": {
-            "model__n_estimators": [100, 200],
-            "model__max_depth": [None, 10, 20],
+            'model__n_estimators':[100,200],
+            'model__max_depth':[5,10,None],
+            'model__min_samples_split':[2,5]
         },
     },
     "gradient_boosting": {
@@ -88,5 +89,5 @@ for name, m in models.items():
 # 6. Save the best model-
 # Chose the best based on ROC-AUC
 winner_model = best_models["logreg"]
-joblib.dump(winner_model, "models/churn_model.pkl")
-print("\nFinal model saved to models/churn_model.pkl")
+joblib.dump(winner_model, "churn_model.pkl")
+print("\nFinal model saved to churn_model.pkl")
