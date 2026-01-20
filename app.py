@@ -25,3 +25,5 @@ def predict(features: dict):
         "churn_prediction": int(prediction),
         "churn_probability": float(round(probability, 4))
     }
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=9696)
